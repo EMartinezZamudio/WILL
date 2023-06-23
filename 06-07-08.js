@@ -11,7 +11,10 @@ function crearClasePersona() {
       // Inicializar las propiedades de la persona con los valores recibidos como argumento
 
       // Tu código aca:
-
+      this.nombre = nombre;
+      this.edad = edad;
+      this.hobbies = hobbies;
+      this.amigos = amigos;
     }
 
     addFriend(nombre, edad) {
@@ -20,15 +23,14 @@ function crearClasePersona() {
       // No debe retornar nada.
 
       // Tu código aca:
-
+      this.amigos.push({ nombre, edad });
     }
 
     addHobby(hobby) {
       // El método 'addHobby' recibe un string 'hobby' y debe agregarlo al arreglo de hobbies de la persona.
       // No debe retornar nada.
-
       // Tu código aca:
-
+      this.hobbies.push(hobby);
     }
     getFriends() {
       // El método 'getFriends' debe retornar un arreglo con sólo los nombres del arreglo de amigos
@@ -36,18 +38,22 @@ function crearClasePersona() {
       // Ej:
       // Suponiendo que la persona tiene estos amigos: [{nombre: 'martin', edad: 31},{nombre: 'toni', edad: 33}]
       // persona.getFriends() debería devolver ['martin', 'toni']
-
       // Tu código aca:
-
+      let nombres = [];
+      this.amigos.map((obj) => {
+        for (let prop in obj) {
+          if (prop === "nombre") nombres.push(obj[prop]);
+        }
+      });
+      return nombres;
     }
 
     getHobbies() {
       // El método 'getHobbies' debe retornar un arreglo con los hobbies de la persona
       // Ej:
       // persona.getHobbies() debe devolver ['correr', 'dormir', 'nadar']
-
       // Tu código aca:
-
+      return this.hobbies;
     }
 
     getPromedioEdad() {
@@ -64,15 +70,39 @@ function crearClasePersona() {
       //   }]
       // }
       // persona.getPromedioEdad() debería devolver 29 ya que (33 + 25) / 2 = 29
-
       // Tu código aca:
-
+      let promedio = 0;
+      this.amigos.map((obj) => {
+        for (let prop in obj) {
+          if (prop === "edad") {
+            promedio += obj[prop] / this.amigos.length;
+          }
+        }
+      });
+      return promedio;
     }
-  };
+  }
+  // let emmanuel = new Persona(
+  //   "Emmanuel",
+  //   27,
+  //   ["musica", "leer"],
+  //   [
+  //     { nombre: "Dayana", edad: 17 },
+  //     { nombre: "Odin", edad: 24 },
+  //   ]
+  // );
+
+  // emmanuel.addFriend("Jorge", 25);
+  // emmanuel.addHobby("Comer");
+  // console.log(emmanuel);
+  // console.log(emmanuel.getFriends());
+  // console.log(emmanuel.getHobbies());
+  // console.log(emmanuel.getPromedioEdad());
 
   return Persona;
 }
+crearClasePersona();
 
 // No modifiques nada debajo de esta linea //
 
-module.exports = crearClasePersona
+module.exports = crearClasePersona;
